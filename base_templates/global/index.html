@@ -1,0 +1,34 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}Bem-vindo à FURIA!{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-principal">
+                <h1 class="main-title">A voz da FURIA te espera. Bora trocar uma ideia?</h1>
+            </div>
+            <p class="hero-subtitle">Você conhece mesmo a FURIA? Vem descobrir com nosso bot.</p>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'global/images/pantera.png' %}" alt="Mascote FURIA">
+        </div>
+    </section>
+
+    <section class="functionalities-section">
+        <div class="functionalities-container">
+            <h2>Funcionalidades do nosso Bot furioso...</h2>
+            <ul class="functionalities-list">
+                <li>Agenda de Jogos da Furia</li>
+                <li>Elenco Atual da Furia</li>
+                <li>Perguntar sobre curiosidades</li>
+                <li>Conversar com o Bot</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'global/css/index.css' %}">
+{% endblock %}

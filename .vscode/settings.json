@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.djhtml": "django-html",
+        "*html": "django-html",
+    }
+}
