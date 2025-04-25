@@ -7,7 +7,8 @@
     <section class="form-section">
         <div class="form-container">
             <h1>Login</h1>
-                {% include 'users/_form.html' with form=form form_action='{% url "users:login" %}' button_text='Entrar' %}  
+                {% url "users:login" as login_url %}
+                {% include 'users/_form.html' with form=form form_action=login_url button_text='Entrar' %}  
             <p class="form-link">Não tem uma conta? <a href="{% url 'users:register' %}">Criar uma conta</a></p>
     </section>
 {% endblock %}

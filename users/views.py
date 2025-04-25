@@ -1,7 +1,8 @@
 # flake8: noqa
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required # decorator para validar se o usuario esta logado
+# decorator para validar se o usuario esta logado
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages, auth
 from users.forms import RegisterForm, RegisterUpdateForm
 
@@ -9,6 +10,8 @@ from users.forms import RegisterForm, RegisterUpdateForm
 # Create your views here.
 
 '''views relacionadas aos formularios de usuarios'''
+
+
 def register(request):
     form = RegisterForm()
 
@@ -18,7 +21,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Usuario registrado com sucesso')
-            return redirect('contact:login')
+            return redirect('home')
 
     return render(
         request,
@@ -69,7 +72,7 @@ def login_view(request):
             messages.success(request, 'Logado com sucesso!')
             return redirect('home')
         messages.error(request, 'Login invalido!')
-            
+
     return render(
         request,
         'users/login.html',

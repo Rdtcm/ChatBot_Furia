@@ -2,10 +2,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from . import models
-from  django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import password_validation
-
 
 
 class RegisterForm(UserCreationForm):
@@ -29,7 +28,6 @@ class RegisterForm(UserCreationForm):
             'username', 'password1', 'password2',
         )
 
-
     def save(self, commit=True):
         cleaned_data = self.cleaned_data
         user = super().save(commit=False)
@@ -38,10 +36,10 @@ class RegisterForm(UserCreationForm):
 
         if password:
             user.set_password(password)
-        
+
         if commit:
             user.save()
-        
+
         return user
 
     def clean(self):
@@ -56,7 +54,6 @@ class RegisterForm(UserCreationForm):
                 )
         return super().clean()
 
-    
     def clean_email(self):
         email = self.cleaned_data.get('email')
         current_email = self.instance.email
@@ -65,11 +62,12 @@ class RegisterForm(UserCreationForm):
             if User.objects.filter(email=email).exists():
                 self.add_error(
                     'email',
-                    ValidationError('Um usuario ja possui este email', code='invalid')
+                    ValidationError(
+                        'Um usuario ja possui este email', code='invalid')
                 )
 
         return email
-    
+
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
 
@@ -81,9 +79,8 @@ class RegisterForm(UserCreationForm):
                     'password1',
                     ValidationError(error)
                 )
-        
 
-    
+
 class RegisterUpdateForm(forms.ModelForm):
     first_name = forms.CharField(
         min_length=2,
@@ -114,7 +111,6 @@ class RegisterUpdateForm(forms.ModelForm):
         help_text='Use the same password as before.',
         required=False,
     )
- 
 
     class Meta:
         model = User
