@@ -14,6 +14,9 @@
         {% endfor %}
     </div>
 
+    <p>Password1: {{ form.password1.value }}</p>
+
+
     {% if form.non_field_errors %}
         <div class="form-content">
             <div class="form-group">
@@ -25,7 +28,7 @@
     {% endif %}
     <div class="form-content">
         <div class="form-group">
-            <button class="btn" type="submit">{{ button_text|default:"Send" }}</button>
+            <button class="btn" type="submit">{{ button_text|default:"Enviar" }}</button>
         </div>
     </div>
 </form>

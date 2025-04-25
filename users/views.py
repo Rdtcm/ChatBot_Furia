@@ -18,10 +18,14 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
 
+        print("POST recebido")
         if form.is_valid():
+            print("Form is valid")
             form.save()
             messages.success(request, 'Usuario registrado com sucesso')
             return redirect('home')
+        else:
+            print("Erros de validacao: ", form.errors)
 
     return render(
         request,

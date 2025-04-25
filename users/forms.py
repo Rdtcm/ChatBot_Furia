@@ -29,6 +29,7 @@ class RegisterForm(UserCreationForm):
         )
 
     def save(self, commit=True):
+        print("O metodo foi chamado!")
         cleaned_data = self.cleaned_data
         user = super().save(commit=False)
 
@@ -45,6 +46,9 @@ class RegisterForm(UserCreationForm):
     def clean(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
+
+        print(password1)
+        print(password2)
 
         if password1 or password2:
             if password1 != password2:
@@ -71,14 +75,19 @@ class RegisterForm(UserCreationForm):
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
 
-        if password1:
-            try:
-                password_validation.validate_password(password1)
-            except ValidationError as error:
-                self.add_error(
-                    'password1',
-                    ValidationError(error)
-                )
+        if password1 is None:
+            raise ValidationError('A senha não pode ser vazia')
+
+        try:
+            password_validation.validate_password(password1)
+        except ValidationError as error:
+            self.add_error(
+                'password1',
+                ValidationError(error)
+            )
+
+        return password1
+
 
 
 class RegisterUpdateForm(forms.ModelForm):
