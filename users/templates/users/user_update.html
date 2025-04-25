@@ -1,0 +1,18 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}Atualizar Usuário - FURIA Chatbot{% endblock %}
+
+{% block content %}
+    <section class="form-section">
+        <div class="form-container">
+            <h1>Atualizar Usuário</h1>
+            {% include 'users/_form.html' with form=form form_action='{% url "users:user_update" %}' button_text='Salvar Alterações' %}
+            <p class="form-link"><a href="{% url 'home' %}">Voltar para a página inicial</a></p>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'global/css/form.css' %}">
+{% endblock %}

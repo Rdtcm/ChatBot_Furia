@@ -1,0 +1,18 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}Criar Conta - FURIA Chatbot{% endblock %}
+
+{% block content %}
+    <section class="form-section">
+        <div class="form-container">
+            <h1>Criar Conta</h1>
+            {% include 'users/_form.html' with form=form form_action='{% url "users:register" %}' button_text='Criar Conta' %}
+            <p class="form-link">Já tem uma conta? <a href="{% url 'login' %}">Entrar</a></p>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'global/css/form.css' %}">
+{% endblock %}

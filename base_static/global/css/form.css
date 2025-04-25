@@ -1,0 +1,111 @@
+/* Estilos gerais para a seção de formulário */
+.form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #222; /* Cor de fundo semelhante à seção de funcionalidades */
+    color: #f8f8f8;
+    min-height: calc(100vh - /* Altura do header e footer, ajuste conforme necessário */ 100px);
+}
+
+.form-container {
+    max-width: 400px;
+    padding: 40px;
+    background-color: #181818; /* Cor de fundo semelhante ao hero */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.form-container h1 {
+    font-size: 2.5em;
+    color: #ff6f00; /* Laranja característico */
+    margin-bottom: 30px;
+}
+
+.form-content {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #ccc;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #f8f8f8;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.form-group .errorlist {
+    color: #ff4d4d; /* Vermelho para erros */
+    margin-top: 5px;
+    padding-left: 15px;
+    font-size: 0.9em;
+}
+
+.form-group .errorlist li {
+    list-style: disc;
+}
+
+.message.error {
+    color: #ff4d4d;
+    padding: 10px;
+    background-color: rgba(255, 77, 77, 0.1);
+    border: 1px solid #ff4d4d;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #ff6f00;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ocupar a largura do container */
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: #e65f00;
+}
+
+.form-link {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.form-link a {
+    color: #ff6f00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-link a:hover {
+    text-decoration: underline;
+}
