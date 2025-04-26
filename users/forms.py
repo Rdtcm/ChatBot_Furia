@@ -89,7 +89,6 @@ class RegisterForm(UserCreationForm):
         return password1
 
 
-
 class RegisterUpdateForm(forms.ModelForm):
     first_name = forms.CharField(
         min_length=2,

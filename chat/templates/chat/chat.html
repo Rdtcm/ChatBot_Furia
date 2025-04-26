@@ -1,0 +1,104 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}Chat - FURIA Chatbot{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'global/css/chat.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="chat-container">
+        <aside class="sidebar">
+            <h2>Conversas Anteriores</h2>
+            <ul id="previous-chats">
+                {% if previous_chats %}
+                    {% for chat in previous_chats %}
+                        <li data-chat-id="{{ chat.id }}">
+                            {% if chat.title %}
+                                {{ chat.title }}
+                            {% else %}
+                                Conversa com {{ chat.other_user.username }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li>Nenhuma conversa anterior.</li>
+                {% endif %}
+            </ul>
+        </aside>
+
+        <main class="chat-area">
+            <div id="chat-messages">
+                <p class="loading-message">Carregando mensagens...</p>
+            </div>
+            <div class="input-area">
+                <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+                <button id="send-button">Enviar</button>
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'chat/js/chat.js' %}"></script>
+    <script>
+        // JavaScript para lidar com a seleção de conversas anteriores
+        const previousChatsList = document.getElementById('previous-chats');
+        const chatMessagesDiv = document.getElementById('chat-messages');
+
+        if (previousChatsList) {
+            previousChatsList.addEventListener('click', function(event) {
+                if (event.target.tagName === 'LI') {
+                    const chatId = event.target.dataset.chatId;
+                    if (chatId) {
+                        // Aqui você faria uma requisição AJAX para carregar as mensagens
+                        // da conversa com o ID 'chatId' e atualizar o 'chatMessagesDiv'
+                        console.log(`Carregar conversa com ID: ${chatId}`);
+                        chatMessagesDiv.innerHTML = '<p class="loading-message">Carregando mensagens...</p>';
+                        // Exemplo de como você poderia fazer a requisição (usando fetch):
+                        fetch(`/chat/api/messages/${chatId}/`)
+                            .then(response => response.json())
+                            .then(data => {
+                                chatMessagesDiv.innerHTML = ''; // Limpa a mensagem de carregamento
+                                data.messages.forEach(message => {
+                                    const messageElement = document.createElement('div');
+                                    messageElement.classList.add('message');
+                                    messageElement.classList.add(message.sender === 'you' ? 'sent' : 'received');
+                                    messageElement.textContent = message.text;
+                                    chatMessagesDiv.appendChild(messageElement);
+                                });
+                            })
+                            .catch(error => {
+                                console.error('Erro ao carregar mensagens:', error);
+                                chatMessagesDiv.innerHTML = '<p class="error-message">Erro ao carregar mensagens.</p>';
+                            });
+                    }
+                }
+            });
+        }
+
+        // JavaScript para lidar com o envio de mensagens (você precisará implementar a lógica real)
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        if (sendButton && messageInput) {
+            sendButton.addEventListener('click', function() {
+                const messageText = messageInput.value.trim();
+                if (messageText) {
+                    console.log('Mensagem a ser enviada:', messageText);
+                    // Aqui você faria uma requisição AJAX ou usaria WebSockets para enviar a mensagem
+                    // para o seu backend
+                    messageInput.value = ''; // Limpa o input após o envio (simulado)
+                }
+            });
+
+            messageInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) { // Enviar ao pressionar Enter (sem Shift)
+                    event.preventDefault(); // Evita a quebra de linha padrão no input
+                    sendButton.click();
+                }
+            });
+        }
+    </script>
+{% endblock %}

@@ -23,5 +23,5 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='global/index.html'), name='home'),
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
-    # path('chat/', include('chat.urls')),
+    path('chat/', include('chat.urls')),
 ]

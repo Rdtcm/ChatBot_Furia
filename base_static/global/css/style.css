@@ -1,4 +1,10 @@
 /* Estilos gerais para o body */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
 body {
     font-family: sans-serif; /* Uma fonte padrão */
     margin: 0; /* Remover margens padrão do body */
@@ -15,45 +21,52 @@ header {
     justify-content: space-between; /* Espaçar a logo e a navegação o máximo possível */
     align-items: center; /* Alinhar verticalmente a logo e os botões */
     border-bottom: 1px solid #eee; /* Uma linha sutil na parte inferior do header */
+    position: relative;
 }
 
 /* Estilos para a logo */
 .logo {
-    display: flex; /* Alinhar a imagem e o texto da logo */
-    align-items: center; /* Alinhar verticalmente a imagem e o texto */
+    display: flex; /* Alinhar a imagem e o link (que contém o texto) */
+    align-items: center; /* Alinhar verticalmente a imagem e o link */
 }
 
 .logo img {
     max-height: 60px; /* Altura máxima da logo */
-    margin-right: 30px; /* Espaço entre a logo e o texto */
+    margin-right: 30px; /* Espaço entre a logo e o link */
 }
 
-.logo span {
+.logo .logo-link {
+    text-decoration: none; /* Remove o sublinhado padrão de links */
+    color: inherit; /* Herda a cor do texto do elemento pai (header) */
+    display: flex; /* Garante que o texto dentro do link não se comporte como bloco */
+    align-items: center; /* Alinha verticalmente o texto dentro do link (embora não seja estritamente necessário aqui, mantém a consistência) */
+}
+
+.logo .logo-link span {
     font-size: 1.5em; /* Tamanho da fonte do nome FURIA */
     font-weight: bold; /* Deixar o nome em negrito */
 }
 
-/* Estilos para a navegação (onde estão os botões) */
-nav {
-    display: flex; /* Alinhar os botões horizontalmente */
+.top-buttons {
+    display: flex;
+    gap: 10px;
 }
 
-/* Estilos para os botões */
-nav button {
-    background-color: black; 
-    color: white; /* Cor do texto branco nos botões */
-    border: none; /* Remover bordas padrão dos botões */
-    padding: 10px 15px; /* Espaçamento interno dos botões */
-    margin-left: 10px; /* Espaço entre os botões */
-    border-radius: 5px; /* Bordas arredondadas */
-    cursor: pointer; /* Mudar o cursor ao passar por cima */
-    font-size: 1em; /* Tamanho da fonte nos botões */
-    transition: background-color 0.3s ease; /* Transição suave para o hover */
+a.btn-top {
+    background-color: #000000;
+    color: white;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
-nav button:hover {
-    background-color: #0056b3; /* Cor de fundo mais escura no hover */
+.btn-top:hover {
+    background-color: #e65c00;
 }
+
 
 /* Estilos para a área de conteúdo (onde as páginas filhas serão inseridas) */
 .content {
