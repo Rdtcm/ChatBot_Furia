@@ -14,4 +14,12 @@ class Conversation(models.Model):
 
 
 class Messages(models.Model):
-    ...
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_bot_messages')
+    text = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_bot = models.BooleanField(default=False)
+
+    def __str__(self):
+        sender_str = "Bot" if self.is_bot else self.sender.username
+        return f"Mensagem de {sender_str} em {self.timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
