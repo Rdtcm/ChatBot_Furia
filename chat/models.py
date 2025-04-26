@@ -3,10 +3,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+'''
+Cada conversa esta diretamente ligada a um usuario
+'''
+
 
 class Conversation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bot_conversations')
-    start_time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='bot_conversations'
+    )
+    start_time = models.DateTimeField(
+        auto_now_add=True
+    )
     last_interaction_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -14,8 +22,10 @@ class Conversation(models.Model):
 
 
 class Messages(models.Model):
-    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_bot_messages')
+    conversation = models.ForeignKey(
+        Conversation, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='sent_bot_messages')
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     is_bot = models.BooleanField(default=False)
