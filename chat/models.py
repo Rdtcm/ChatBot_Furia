@@ -5,6 +5,15 @@ from django.contrib.auth.models import User
 # Create your models here.
 '''
 Cada conversa esta diretamente ligada a um usuario
+
+ESTRUTURA:
+
+Um usuário ➔ pode ter várias conversas.
+
+Uma conversa ➔ pode ter várias mensagens.
+
+Uma mensagem ➔ pertence a uma única conversa.
+
 '''
 
 
@@ -16,6 +25,7 @@ class Conversation(models.Model):
         auto_now_add=True
     )
     last_interaction_time = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"Conversa com Bot (Usuario: {self.user.username}, ID: {self.id})"

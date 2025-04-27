@@ -58,17 +58,39 @@ def get_messages(request, chat_id):
 
 
 @login_required(login_url='users:login')
-def send_message(request):
+def send_message(request, chat_id):
     '''
         Esta view sera responsavel por receber uma mensagem, identificar se e 
         comando, isto e, inicia-se com "/", e retornar uma resposta.
 
-        Preciso conectar com a api do chatgpt ou do gemini que sera o meu "bot"
+        Preciso conectar com a api do deep seek
 
         Preciso verificar se e um comando, e conectar com as apis que fornecem 
         o ranking da furia, o elenco da furia e o catalogo de jogos da furia
 
     '''
+
+    if request.is_ajax():
+        try:
+            data = json.loads(request.body)
+            message_text = data.get('message')
+            chat_id = data.get('chat_id')
+
+            if not message_text:
+                return JsonResponse({'error': 'Mensagem Vazia!'}, status=400)
+            
+            # verificando se existe uma conversa com o chat_id
+            if chat_id:
+                Conversation = get_object_or_404(Conversation, id=chat_id, user=request.user)
+            else:
+                Conversation = Conversation.objects.create(user=request.user)
+            
+            
+
+        except Exception as e:
+            return JsonResponse({'error': 'Requisicao Invalida!'}, status=400)
+
+
 
 
 @login_required(login_url='users:login')
@@ -79,4 +101,21 @@ def get_previous_chat(request):
 
         SOMENTE USUARIOS LOGADOS DEVEM TER ACESSO
     '''
-    ...
+
+    if request.is_ajax():
+        # buscaando todas as conversas de um usuario
+        previous_chat = Conversation.objects.filter(
+            user=request.user).order_by('-last_interaction_time')
+        
+        chats_data = []
+        for chat in previous_chat:
+            chats_data.append({
+                'id': chat.id,
+                'title': chat.title if chat.title else "Chat com Bot",
+                'last_interaction': chat.last_interaction_time.strftime('%Y-%m-%d %H:%M:%S')
+            })
+
+        return JsonResponse({'previous_chat': chats_data})
+    else:
+        return JsonResponse({'error': 'A requisicao deve ser AJAX'}, status=400)
+    
