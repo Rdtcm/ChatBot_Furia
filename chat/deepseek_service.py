@@ -1,3 +1,4 @@
+# flake8: noqa
 '''
     Arquivo destinado a integrar com a api do DeepSeek
 
@@ -6,9 +7,13 @@
 '''
 
 import requests
+import os
+from dotenv import load_dotenv
 
 
-DEEPSEEK_API_KEY = 'sk-b6a0c4a5aaee452aa70715c13a73f11b'
+load_dotenv()
+DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
+
 DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions'
 
 
