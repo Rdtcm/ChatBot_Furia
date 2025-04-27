@@ -19,6 +19,8 @@ DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions'
 
 def enviar_para_deepseek(mensagem_usuario):
 
+    contexto = "Você é um bot especializado em fornecer informações sobre o time FURIA e-Sports"
+
     headers = {
         'Authorization': f'Bearer {DEEPSEEK_API_KEY}',
         'Content-Type': 'application/json',
@@ -26,6 +28,7 @@ def enviar_para_deepseek(mensagem_usuario):
     payload = {
         'model': 'deepseek-chat',  # modelo de chat
         'messages': [
+            {'role': 'system', 'content': contexto},
             {'role': 'user', 'content': mensagem_usuario}
         ],
         'temperature': 0.7

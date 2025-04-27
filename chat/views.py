@@ -29,7 +29,7 @@ def get_messages(request: HttpRequest, chat_id: int) -> JsonResponse:
        clicar em uma conversa, o js fara uma requisicao do tipo AJAX
     '''
 
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         try:
             # tenta buscar uma conversa, se nao existir retorna um status 404
             conversation = get_object_or_404(
@@ -74,7 +74,7 @@ def send_message(request, chat_id):
 
     '''
 
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         try:
             data = json.loads(request.body)
             message_text = data.get('message')
@@ -151,7 +151,7 @@ def get_previous_chat(request):
         SOMENTE USUARIOS LOGADOS DEVEM TER ACESSO
     '''
 
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         # buscaando todas as conversas de um usuario
         previous_chat = Conversation.objects.filter(
             user=request.user).order_by('-last_interaction_time')
