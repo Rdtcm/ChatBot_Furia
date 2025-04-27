@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Conversation, Messages
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 import json
 from .pandascore_service import buscar_agenda_furia, buscar_elenco_furia
 from .deepseek_service import enviar_para_deepseek
@@ -24,7 +24,7 @@ def chat_view(request):
 
 
 @login_required(login_url='users:login')
-def get_messages(request, chat_id):
+def get_messages(request: HttpRequest, chat_id: int) -> JsonResponse:
     '''Este metodo vai ser chamado pelo js no frontend quando o usuario
        clicar em uma conversa, o js fara uma requisicao do tipo AJAX
     '''
@@ -57,6 +57,8 @@ def get_messages(request, chat_id):
         except Exception as e:
             # caso ocorra algum erro, retorno status 500
             return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'O request deve ser do tipo AJAX'})
 
 
 @login_required(login_url='users:login')

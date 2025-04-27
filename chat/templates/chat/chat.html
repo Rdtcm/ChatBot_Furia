@@ -4,7 +4,7 @@
 {% block title %}Chat - FURIA Chatbot{% endblock %}
 
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'global/css/chat.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'global/css/chat.css' %}"> {% endcomment %}
 {% endblock %}
 
 {% block content %}
@@ -41,8 +41,7 @@
 {% endblock %}
 
 {% block extra_scripts %}
-    <script src="{% static 'global/js/chat.js' %}"></script>
-    <script>
+    {% comment %} <script src="{% static 'global/js/chat.js' %}"></script> {% endcomment %}
         <script>
             // Seleção de elementos do DOM
             const previousChatsList = document.getElementById('previous-chats');
@@ -159,6 +158,4 @@
             // Inicializa a lista de conversas ao carregar a página
             updatePreviousChats();
         </script>
-        
-    </script>
 {% endblock %}
