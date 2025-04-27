@@ -18,6 +18,7 @@ Uma mensagem ➔ pertence a uma única conversa.
 
 
 class Conversation(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='bot_conversations'
     )

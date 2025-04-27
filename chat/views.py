@@ -44,7 +44,7 @@ def get_messages(request: HttpRequest, chat_id: int) -> JsonResponse:
             for message in messages:
                 messages_data.append(
                     {
-                        'id': message.id,
+                        'id': message.id,  # type: ignore
                         'sender': message.sender.username,
                         'text': message.text,
                         'timestamp': message.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
@@ -124,16 +124,16 @@ def send_message(request, chat_id):
 
             return JsonResponse({
                 'user_message': {
-                    'id': user_message.id,
+                    'id': user_message.id,  # type: ignore
                     'text': user_message.text,
-                    'timestamp': user_message.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+                    'timestamp': user_message.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
                 },
                 'bot_message': {
-                    'id': bot_message.id,
+                    'id': bot_message.id,  # type: ignore
                     'text': bot_message.text,
-                    'timestamp': bot_message.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+                    'timestamp': bot_message.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
                 },
-                'chat_id': conversation.id
+                'chat_id': conversation.id,
             })
 
         except Exception as e:
