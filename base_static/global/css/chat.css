@@ -4,24 +4,26 @@
     display: flex;
     height: 80vh; /* Ajuste a altura conforme necessário */
     margin: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #444;
     border-radius: 8px;
     overflow: hidden;
+    background-color: #1f1f1f; /* Cor de fundo escura */
 }
 
 /* Barra lateral com as conversas anteriores */
 .sidebar {
     width: 250px;
-    background-color: #f8f8f8;
-    border-right: 1px solid #eee;
+    background-color: #2c2c2c; /* Cor de fundo escura para a sidebar */
+    border-right: 1px solid #444;
     padding: 15px;
     overflow-y: auto;
+    color: #fff; /* Texto claro */
 }
 
 .sidebar h2 {
     font-size: 1.2em;
     margin-bottom: 10px;
-    color: #333;
+    color: #ddd; /* Cor do título */
 }
 
 .sidebar ul {
@@ -32,9 +34,10 @@
 
 .sidebar ul li {
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #444;
     cursor: pointer;
     transition: background-color 0.2s;
+    color: #fff; /* Texto claro */
 }
 
 .sidebar ul li:last-child {
@@ -42,11 +45,11 @@
 }
 
 .sidebar ul li:hover {
-    background-color: #f0f0f0;
+    background-color: #444; /* Fundo escuro ao passar o mouse */
 }
 
 .sidebar ul li.active {
-    background-color: #e0e0e0;
+    background-color: #555; /* Fundo mais escuro quando ativo */
     font-weight: bold;
 }
 
@@ -56,7 +59,8 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
-    background-color: #fff;
+    background-color: #2c2c2c; /* Cor de fundo escura para a área de chat */
+    color: #fff; /* Texto claro */
 }
 
 /* Container para as mensagens do chat */
@@ -68,7 +72,7 @@
 
 #chat-messages .loading-message,
 #chat-messages .error-message {
-    color: #777;
+    color: #aaa; /* Cor clara para mensagens de loading e erro */
     font-style: italic;
 }
 
@@ -80,12 +84,12 @@
 }
 
 .message.sent {
-    background-color: #dcf8c6; /* Verde claro para mensagens enviadas */
+    background-color: #3e8e41; /* Verde escuro para mensagens enviadas */
     align-self: flex-end; /* Alinha as mensagens enviadas à direita */
 }
 
 .message.received {
-    background-color: #f0f0f0; /* Cinza claro para mensagens recebidas */
+    background-color: #444; /* Cinza escuro para mensagens recebidas */
     align-self: flex-start; /* Alinha as mensagens recebidas à esquerda */
 }
 
@@ -93,17 +97,19 @@
 .input-area {
     display: flex;
     margin-top: 10px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #444;
     padding-top: 10px;
 }
 
 .input-area input[type="text"] {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #666;
     border-radius: 5px;
     margin-right: 10px;
     font-size: 1em;
+    background-color: #333; /* Cor de fundo do input */
+    color: #fff; /* Texto claro no input */
 }
 
 .input-area button {
@@ -119,5 +125,5 @@
 }
 
 .input-area button:hover {
-    background-color: #e65c00;
+    background-color: #e65c00; /* Cor de hover para o botão */
 }
