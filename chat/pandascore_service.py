@@ -13,8 +13,7 @@ import os
 from dotenv import load_dotenv
 
 
-load_dotenv()
-PANDASCORE_API_KEY = os.getenv('PANDASCORE_API_KEY')
+PANDASCORE_API_KEY = 'CCAVWVTv5VmG9RWGqB_icg7ePM8gJGJuoTLmdGcK4OJ4MFi3vE0'
 
 
 def buscar_elenco_furia():
@@ -23,6 +22,8 @@ def buscar_elenco_furia():
         'Authorization': f'Bearer {PANDASCORE_API_KEY}'
     }
     response = requests.get(url, headers=headers)
+
+    print(response)
 
     if response.status_code == 200:
         try:
@@ -43,12 +44,14 @@ def buscar_agenda_furia():
     }
 
     response = requests.get(url, headers=headers)
+    print(response)
 
     if response.status_code == 200:
         matches = response.json()
         agenda = []
 
         for match in matches:
+            print(match)
             opponents = [opponent['opponent']['name'].lower()
                          for opponent in match['opponents']]
             if "furia" in opponents:
@@ -63,3 +66,20 @@ def buscar_agenda_furia():
             return ["Nenhum jogo encontrado."]
     else:
         return [f"Erro ao buscar agenda: {response.status_code}"]
+
+
+if __name__ == '__main__':
+    print(PANDASCORE_API_KEY)
+
+    # testando se a API responde corretamente
+    agenda_furia = buscar_agenda_furia()
+    print(agenda_furia)
+
+    elenco_furia = buscar_elenco_furia()
+    print(elenco_furia)
+
+    '''
+        lEMBRETE***
+        
+        preciso filtrar corretamente os dados da furia nesta api
+    '''

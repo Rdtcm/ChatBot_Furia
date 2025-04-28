@@ -9,6 +9,10 @@ media
 # Backup files # 
 *.bak 
 
+# api key
+API_KEY_PANDASCORE.env
+API_KEY_DEEPSEEK.env
+
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml

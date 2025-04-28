@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
-DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
+DEEPSEEK_API_KEY = 'sk-b6a0c4a5aaee452aa70715c13a73f11b'
 
 DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions'
 
@@ -40,3 +40,12 @@ def enviar_para_deepseek(mensagem_usuario):
         return resposta['choices'][0]['message']['content']
     else:
         return "Erro ao conectar com o DeepSeek."
+
+
+if __name__ == '__main__':
+    # testando a api do deep seek
+    print(DEEPSEEK_API_KEY)
+
+    resposta = enviar_para_deepseek('Ola')
+
+    print(resposta)

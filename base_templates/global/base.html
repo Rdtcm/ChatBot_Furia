@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <title>{% block title %}FURIA Chatbot{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'global/css/style.css' %}"> {% block extra_head %}{% endblock %} 
 </head>
@@ -33,5 +34,5 @@
     <footer>
     </footer>
 
-    <script src="{% static 'global/js/script.js' %}"></script> {% block extra_scripts %}{% endblock %} </body>
+    </body>
 </html>

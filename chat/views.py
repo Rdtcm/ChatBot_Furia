@@ -167,3 +167,6 @@ def get_previous_chat(request):
         return JsonResponse({'previous_chat': chats_data})
     else:
         return JsonResponse({'error': 'A requisicao deve ser AJAX'}, status=400)
+
+
+
