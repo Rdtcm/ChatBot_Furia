@@ -8,6 +8,7 @@
     A api do deepseek nao e gratuita como imaginei, por isso, irei usar
     o OpenRouter a partir de agora - usando o modelo deepseek v3 (free)
 '''
+
 from dotenv import load_dotenv
 import os
 import requests
@@ -60,7 +61,6 @@ def enviar_para_openrouter(mensagem_usuario: str) -> str:
 
 if __name__ == '__main__':
     # testando a api do deep seek
-    print(OPENROUTER_API_KEY)
     resposta = enviar_para_openrouter(
         "Ola, me conte por que a furia e tao boa no que faz"
     )
