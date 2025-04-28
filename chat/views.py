@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpRequest
 import json
 from .pandascore_service import buscar_agenda_furia, buscar_elenco_furia
-from .deepseek_service import enviar_para_deepseek
+from .deepseek_service import enviar_para_openrouter
 # Create your views here.
 
 
@@ -101,7 +101,7 @@ def send_message(request, chat_id):
                         'ou /agenda.'
             else:
                 # se nao for um comando, envio para a api do DeepSeek
-                bot_response = enviar_para_deepseek(message_text)
+                bot_response = enviar_para_openrouter(message_text)
 
             # salvando a mensagem do usuario no banco de dados
             user_message = Messages.objects.create(
@@ -167,6 +167,3 @@ def get_previous_chat(request):
         return JsonResponse({'previous_chat': chats_data})
     else:
         return JsonResponse({'error': 'A requisicao deve ser AJAX'}, status=400)
-
-
-

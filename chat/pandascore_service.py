@@ -12,65 +12,90 @@ import requests
 import os
 from dotenv import load_dotenv
 
-
-PANDASCORE_API_KEY = 'CCAVWVTv5VmG9RWGqB_icg7ePM8gJGJuoTLmdGcK4OJ4MFi3vE0'
+load_dotenv()
+PANDASCORE_API_KEY = os.getenv('PANDASCORE_API_KEY')
 
 
 def buscar_elenco_furia():
-    url = 'https://api.pandascore.co/csgo/teams?search=furia'
+    url = 'https://api.pandascore.co/csgo/tournaments?search=furia'
     headers = {
         'Authorization': f'Bearer {PANDASCORE_API_KEY}'
     }
-    response = requests.get(url, headers=headers)
+    resp = requests.get(url, headers=headers)
+    if resp.status_code != 200:
+        return [f"Erro ao buscar torneios: {resp.status_code}"]
 
-    print(response)
+    try:
+        torneios = resp.json()
+    except ValueError:
+        return ["Resposta da API não é um JSON válido."]
 
-    if response.status_code == 200:
-        try:
-            data = response.json()
-            if data:
-                elenco = [player['name'] for player in data[0]['players']]
-                return elenco
-            else:
-                return ["Time da Furia não encontrado."]
-        except ValueError:
-            return ["Erro ao processar a resposta da API."]
+    # ID ou slug da FURIA para comparar
+    TARGET_SLUG = 'furia'
+
+    # Percorre todos os torneios retornados
+    for torneio in torneios:
+        # Dentro de cada torneio, há uma lista "expected_roster"
+        roster = torneio.get('expected_roster', [])
+        if not roster:
+            continue
+
+        # Para cada entrada de roster, checa se o time é a FURIA
+        for entry in roster:
+            team = entry.get('team') or {}
+            if team.get('slug', '').lower() == TARGET_SLUG:
+                players = entry.get('players', [])
+                # Filtra só os ativos e retorna os nomes
+                elenco = [p['name'] for p in players if p.get('active')]
+                if elenco:
+                    return elenco
+
+    # Se chegar aqui, não encontrou nenhum roster válido da FURIA
+    return ["Time da FURIA não encontrado em nenhum roster."]
 
 
 def buscar_agenda_furia():
-    url = 'https://api.pandascore.co/csgo/matches/upcoming'
+    url = 'https://api.pandascore.co/csgo/tournaments?search=furia'
     headers = {
         'Authorization': f'Bearer {PANDASCORE_API_KEY}'
     }
+    resp = requests.get(url, headers=headers)
+    if resp.status_code != 200:
+        return [f"Erro ao buscar torneios: {resp.status_code}"]
 
-    response = requests.get(url, headers=headers)
-    print(response)
+    try:
+        torneios = resp.json()
+    except ValueError:
+        return ["Resposta da API não é um JSON válido."]
 
-    if response.status_code == 200:
-        matches = response.json()
-        agenda = []
+    TARGET_SLUG = 'furia'
+    agenda = []
 
-        for match in matches:
-            print(match)
-            opponents = [opponent['opponent']['name'].lower()
-                         for opponent in match['opponents']]
-            if "furia" in opponents:
-                adversarios = ' vs '.join(
-                    [opponent['opponent']['name'] for opponent in match['opponents']])
-                agenda.append(
-                    f"{adversarios} - {match['begin_at']} - {match['league']['name']}"
-                )
-        if agenda:
-            return agenda
-        else:
-            return ["Nenhum jogo encontrado."]
-    else:
-        return [f"Erro ao buscar agenda: {response.status_code}"]
+    for torneio in torneios:
+        # só processa torneios onde a FURIA está no roster esperado
+        roster = torneio.get('expected_roster', [])
+        if not any((entry.get('team') or {}).get('slug', '').lower() == TARGET_SLUG for entry in roster):
+            continue
+
+        # extrai todas as partidas agendadas desse torneio
+        for m in torneio.get('matches', []):
+            agenda.append({
+                'id':           m.get('id'),
+                'name':         m.get('name'),
+                'scheduled_at': m.get('scheduled_at') or m.get('begin_at'),
+                'slug':         m.get('slug'),
+                'tournament':   torneio.get('name'),
+                # se quiser incluir league (nome da liga), pode usar:
+                'league':      (torneio.get('league') or {}).get('name'),
+            })
+
+    if not agenda:
+        return [f"Nenhum jogo da FURIA encontrado nos torneios."]
+
+    return agenda
 
 
 if __name__ == '__main__':
-    print(PANDASCORE_API_KEY)
-
     # testando se a API responde corretamente
     agenda_furia = buscar_agenda_furia()
     print(agenda_furia)
@@ -80,6 +105,31 @@ if __name__ == '__main__':
 
     '''
         lEMBRETE***
-        
-        preciso filtrar corretamente os dados da furia nesta api
+
+        Elenco furia funcionando!
+
+        exemplo de retorno da funcao agenda:
+
+        {
+            "agenda": [
+                {
+                "id": 1170665,
+                "name": "Quarterfinal 1: ghoulsW vs FURIA",
+                "scheduled_at": "2025-05-02T10:00:00Z",
+                "slug": "ghoulsw-2025-05-02",
+                "tournament": "Playoffs",
+                "league": "Paramigo Cup"
+                },
+                {
+                "id": 1170700,
+                "name": "Semifinal: FURIA vs TBD",
+                "scheduled_at": "2025-05-03T16:00:00Z",
+                "slug": "furia-2025-05-03",
+                "tournament": "Playoffs",
+                "league": "Paramigo Cup"
+                }
+                // ...
+            ]
+        }
+
     '''
