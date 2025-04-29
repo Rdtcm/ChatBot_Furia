@@ -66,8 +66,13 @@
 /* Container para as mensagens do chat */
 #chat-messages {
     flex-grow: 1;
+    height: 100%;
+    max-height: 60vh; /* Ajuste conforme necessário */
     overflow-y: auto;
-    padding-bottom: 10px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 #chat-messages .loading-message,
