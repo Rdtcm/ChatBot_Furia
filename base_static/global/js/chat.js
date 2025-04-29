@@ -38,25 +38,42 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // Carrega mensagens
     function loadMessages(chatId) {
-      console.log('→ loadMessages(', chatId, ')');
       fetch(`/chat/api/messages/${chatId}/`)
-        .then(res => res.json())
-        .then(data => {
-          chatMessages.innerHTML = '';
-          data.messages.forEach(msg => {
-            const p = document.createElement('p');
-            p.textContent = `${msg.sender}: ${msg.text}`;
-            chatMessages.appendChild(p);
+          .then(response => response.json())
+          .then(data => {
+              const chatMessages = document.getElementById('chat-messages');
+              chatMessages.innerHTML = '';
+  
+              data.messages.forEach(msg => {
+                  const messageElement = document.createElement('p');
+                  const sender = msg.is_bot ? 'Bot' : msg.sender;
+  
+                  messageElement.textContent = `${sender}: ${msg.text}`;
+                  chatMessages.appendChild(messageElement);
+              });
+          })
+          .catch(error => {
+              console.error('Erro ao carregar mensagens:', error);
           });
-        })
-        .catch(err => console.error('Erro ao carregar mensagens:', err));
-    }
+  }
+  
   
     // Exibe mensagem
     function displayMessage({ sender, content }) {
       const div = document.createElement('div');
+      div.classList.add('message');
+
+      if (sender == 'Você') {
+        div.classList.add('sent');
+      } else {
+        div.classList.add('received');
+      }
+
       div.textContent = `${sender}: ${content}`;
       chatMessages.appendChild(div);
+
+      // fazendo scroll automatico
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   
     // Envia mensagem ao backend

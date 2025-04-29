@@ -40,7 +40,6 @@ def get_messages(request: HttpRequest, chat_id: int) -> JsonResponse:
 @login_required(login_url='users:login')
 @require_http_methods(['POST'])
 def send_message(request) -> JsonResponse:
-    # Nota: não requer X-Requested-With, apenas POST JSON com CSRF
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
