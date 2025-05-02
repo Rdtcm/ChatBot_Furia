@@ -38,6 +38,8 @@ Este projeto foi desenvolvido como parte do desafio técnico para a FURIA, com o
 
 ## 📂 Como Rodar Localmente
 
+# Obs: 
+
 1. Clone este repositório:
 
 ```bash
@@ -55,12 +57,14 @@ pip install -r requirements.txt
 
 3. Configure variáveis de ambiente:
 
-Crie um arquivo `.env` com suas chaves da PandaScore e OpenRouter.
+Crie um arquivo `.env` com suas chaves da PandaScore e OpenRouter:
 
 ```
 PANDASCORE_TOKEN=seu_token_aqui
 OPENROUTER_API_KEY=sua_api_key_aqui
 ```
+
+> ⚠️ **Observação**: é necessário gerar suas próprias API keys diretamente nos sites da [PandaScore](https://pandascore.co) e [OpenRouter](https://openrouter.ai/) e criar o arquivo `.env` no diretório raiz para que tudo funcione corretamente.
 
 4. Execute o servidor:
 
