@@ -1,6 +1,6 @@
 # 🐺 Chatbot FURIA Fans — Experiência Conversacional
 
-Este projeto foi desenvolvido como parte do desafio técnico para a FURIA, com o objetivo de criar uma experiência conversacional para os fãs do time de CS\:GO. O sistema consiste em um chatbot interativo que permite ao usuário acompanhar informações do time, interagir com comandos específicos e conversar com um agente inteligente.
+Este projeto foi desenvolvido como parte do desafio técnico para a FURIA, com o objetivo de criar uma experiência conversacional para os fãs do time de CS\:GO. O sistema consiste em um chatbot interativo que permite ao usuário acompanhar informações do time, interagir com comandos específicos e conversar com um agente inteligente. Estou aberto a sugestões e melhorias no projeto.
 
 ---
 
@@ -88,17 +88,13 @@ Este projeto entrega uma experiência prática e interativa voltada para a comun
 
 ## 📸 Demonstração
 Index
-![Screenshot from 2025-05-02 17-25-28](https://github.com/user-attachments/assets/e0dab788-3ec4-460c-8000-27f73bd2ff49)
+![Screenshot from 2025-05-02 17-25-28](https://github.com/user-attachments/assets/e0dab788-3ec4-460c-8000-27f73bd2ff49)  
 Login
-![Screenshot from 2025-05-02 17-25-34](https://github.com/user-attachments/assets/1f2bd7b9-03c5-49b8-8dcc-aaed0996a1dd)
+![Screenshot from 2025-05-02 17-25-34](https://github.com/user-attachments/assets/1f2bd7b9-03c5-49b8-8dcc-aaed0996a1dd)  
 Criar Conta
-![Screenshot from 2025-05-02 17-25-39](https://github.com/user-attachments/assets/a7a6651b-37c5-49dd-b6a0-c502f5688735)
+![Screenshot from 2025-05-02 17-25-39](https://github.com/user-attachments/assets/a7a6651b-37c5-49dd-b6a0-c502f5688735)  
 Pagina de Chat
-![Screenshot from 2025-05-02 17-25-55](https://github.com/user-attachments/assets/02ccb182-fa4f-45c1-bf3f-3075f900f731)
-
-![Screenshot from 2025-05-02 17-41-07](https://github.com/user-attachments/assets/c708a51c-dab6-4c46-9729-5ac682290777)
-
-![Screenshot from 2025-05-02 17-09-27](https://github.com/user-attachments/assets/96322b52-67e5-492b-9fb0-5bc20db9f925)
+![Screenshot from 2025-05-02 19-25-34](https://github.com/user-attachments/assets/47d8c540-af5b-4998-adef-ac211b6ec2c3)  
 
 ---
 
