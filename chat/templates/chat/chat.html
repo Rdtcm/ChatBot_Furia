@@ -15,11 +15,7 @@
                 {% if previous_chats %}
                     {% for chat in previous_chats %}
                         <li data-chat-id="{{ chat.id }}">
-                            {% if chat.title %}
-                                {{ chat.title }}
-                            {% else %}
-                                Conversa com {{ chat.other_user.username }}
-                            {% endif %}
+                            Conversa com Bot
                         </li>
                     {% endfor %}
                 {% else %}

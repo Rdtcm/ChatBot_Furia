@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse, HttpRequest
 from .models import Conversation, Messages
-from .pandascore_service import buscar_agenda_furia, buscar_elenco_furia
+from .pandascore_service import buscar_torneios_furia, buscar_elenco_furia
 from .deepseek_service import enviar_para_openrouter
 
 
@@ -15,6 +15,7 @@ def chat_view(request):
     previous_chats = Conversation.objects.filter(
         user=request.user
     ).order_by('-last_interaction_time')
+
     return render(request, 'chat/chat.html', {
         'previous_chats': previous_chats,
     })
@@ -70,8 +71,8 @@ def send_message(request) -> JsonResponse:
     if message_text.startswith('/'):
         if message_text == '/elenco':
             bot_response = buscar_elenco_furia()
-        elif message_text == '/agenda':
-            bot_response = buscar_agenda_furia()
+        elif message_text == '/torneios':
+            bot_response = buscar_torneios_furia()
         else:
             bot_response = 'Comando não reconhecido. Use /elenco ou /agenda.'
     else:

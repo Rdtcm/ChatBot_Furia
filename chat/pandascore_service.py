@@ -53,7 +53,7 @@ def buscar_elenco_furia() -> list:
     return ["Time da FURIA não encontrado em nenhum roster."]
 
 
-def buscar_agenda_furia() -> list:
+def buscar_torneios_furia() -> list:
     url = f'https://api.pandascore.co/teams/{ID_TIME_FURIA}/leagues'
     headers = {
         'Authorization': f'Bearer {PANDASCORE_API_KEY}'
@@ -95,9 +95,8 @@ def buscar_agenda_furia() -> list:
 if __name__ == '__main__':
     # testando se a API responde corretamente
     # endpoint que fornece os torneios que a furia participou: https://api.pandascore.co/teams/124530/leagues
-    agenda_furia = buscar_agenda_furia()
-    for torneio in agenda_furia:
-        print(torneio)
+    agenda_furia = buscar_torneios_furia()
+    print(agenda_furia)
 
     elenco_furia = buscar_elenco_furia()
     print(elenco_furia)
