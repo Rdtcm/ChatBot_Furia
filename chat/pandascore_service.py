@@ -11,12 +11,16 @@
 import requests
 import os
 from dotenv import load_dotenv
+from datetime import datetime
+
 
 load_dotenv()
 PANDASCORE_API_KEY = os.getenv('PANDASCORE_API_KEY')
+ID_TIME_FURIA = 124530
+DATA_ATUAL = datetime.now()
 
 
-def buscar_elenco_furia():
+def buscar_elenco_furia() -> list:
     url = 'https://api.pandascore.co/csgo/tournaments?search=furia'
     headers = {
         'Authorization': f'Bearer {PANDASCORE_API_KEY}'
@@ -30,17 +34,13 @@ def buscar_elenco_furia():
     except ValueError:
         return ["Resposta da API não é um JSON válido."]
 
-    # ID ou slug da FURIA para comparar
     TARGET_SLUG = 'furia'
 
-    # Percorre todos os torneios retornados
     for torneio in torneios:
-        # Dentro de cada torneio, há uma lista "expected_roster"
         roster = torneio.get('expected_roster', [])
         if not roster:
             continue
 
-        # Para cada entrada de roster, checa se o time é a FURIA
         for entry in roster:
             team = entry.get('team') or {}
             if team.get('slug', '').lower() == TARGET_SLUG:
@@ -50,12 +50,11 @@ def buscar_elenco_furia():
                 if elenco:
                     return elenco
 
-    # Se chegar aqui, não encontrou nenhum roster válido da FURIA
     return ["Time da FURIA não encontrado em nenhum roster."]
 
 
-def buscar_agenda_furia():
-    url = 'https://api.pandascore.co/csgo/tournaments?search=furia'
+def buscar_agenda_furia() -> list:
+    url = f'https://api.pandascore.co/teams/{ID_TIME_FURIA}/leagues'
     headers = {
         'Authorization': f'Bearer {PANDASCORE_API_KEY}'
     }
@@ -68,68 +67,37 @@ def buscar_agenda_furia():
     except ValueError:
         return ["Resposta da API não é um JSON válido."]
 
-    TARGET_SLUG = 'furia'
-    agenda = []
+    torneios_2025 = []
 
     for torneio in torneios:
-        # só processa torneios onde a FURIA está no roster esperado
-        roster = torneio.get('expected_roster', [])
-        if not any((entry.get('team') or {}).get('slug', '').lower() == TARGET_SLUG for entry in roster):
-            continue
+        for serie in torneio.get("series", []):
+            begin_at = serie.get("begin_at")
+            if begin_at:
+                data_inicio = datetime.fromisoformat(
+                    begin_at.replace("Z", "+00:00"))
+                if data_inicio.year == 2025:
+                    torneios_2025.append({
+                        "torneio": torneio.get("name"),
+                        "inicio": data_inicio.strftime("%d/%m/%Y"),
+                        "season": serie.get("season"),
+                        "serie_nome": serie.get("full_name")
+                    })
 
-        # extrai todas as partidas agendadas desse torneio
-        for m in torneio.get('matches', []):
-            agenda.append({
-                'id':           m.get('id'),
-                'name':         m.get('name'),
-                'scheduled_at': m.get('scheduled_at') or m.get('begin_at'),
-                'slug':         m.get('slug'),
-                'tournament':   torneio.get('name'),
-                # se quiser incluir league (nome da liga), pode usar:
-                'league':      (torneio.get('league') or {}).get('name'),
-            })
+    if not torneios_2025:
+        return ["Não há torneios da FURIA em 2025 nesse momento."]
 
-    if not agenda:
-        return [f"Nenhum jogo da FURIA encontrado nos torneios."]
-
-    return agenda
+    return [
+        f"{t['torneio']} ({t['serie_nome'] or t['season']}) - Início: {t['inicio']}"
+        for t in torneios_2025
+    ]
 
 
 if __name__ == '__main__':
     # testando se a API responde corretamente
+    # endpoint que fornece os torneios que a furia participou: https://api.pandascore.co/teams/124530/leagues
     agenda_furia = buscar_agenda_furia()
-    print(agenda_furia)
+    for torneio in agenda_furia:
+        print(torneio)
 
     elenco_furia = buscar_elenco_furia()
     print(elenco_furia)
-
-    '''
-        lEMBRETE***
-
-        Elenco furia funcionando!
-
-        exemplo de retorno da funcao agenda:
-
-        {
-            "agenda": [
-                {
-                "id": 1170665,
-                "name": "Quarterfinal 1: ghoulsW vs FURIA",
-                "scheduled_at": "2025-05-02T10:00:00Z",
-                "slug": "ghoulsw-2025-05-02",
-                "tournament": "Playoffs",
-                "league": "Paramigo Cup"
-                },
-                {
-                "id": 1170700,
-                "name": "Semifinal: FURIA vs TBD",
-                "scheduled_at": "2025-05-03T16:00:00Z",
-                "slug": "furia-2025-05-03",
-                "tournament": "Playoffs",
-                "league": "Paramigo Cup"
-                }
-                // ...
-            ]
-        }
-
-    '''
