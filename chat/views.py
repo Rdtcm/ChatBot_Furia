@@ -28,7 +28,7 @@ def get_messages(request: HttpRequest, chat_id: int) -> JsonResponse:
     messages = Messages.objects.filter(
         conversation=conversation).order_by('timestamp')
     messages_data = [{
-        'id': m.id, # type: ignore
+        'id': m.id,  # type: ignore
         'sender': m.sender.username,
         'text': m.text,
         'timestamp': m.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
@@ -57,6 +57,16 @@ def send_message(request) -> JsonResponse:
     else:
         conversation = Conversation.objects.create(user=request.user)
 
+    # pegando as mensagens anteriores
+    mensagens_anteriores = Messages.objects.filter(
+        conversation=conversation
+    ).order_by('timestamp')
+
+    historico = []
+    for m in mensagens_anteriores:
+        role = "assistant" if m.is_bot else "user"
+        historico.append({"role": role, "content": m.text})
+
     if message_text.startswith('/'):
         if message_text == '/elenco':
             bot_response = buscar_elenco_furia()
@@ -65,7 +75,7 @@ def send_message(request) -> JsonResponse:
         else:
             bot_response = 'Comando não reconhecido. Use /elenco ou /agenda.'
     else:
-        bot_response = enviar_para_openrouter(message_text).strip()
+        bot_response = enviar_para_openrouter(message_text, historico).strip()
 
     user_message = Messages.objects.create(
         conversation=conversation,
@@ -85,12 +95,12 @@ def send_message(request) -> JsonResponse:
 
     return JsonResponse({
         'user_message': {
-            'id': user_message.id, # type: ignore
+            'id': user_message.id,  # type: ignore
             'text': user_message.text,
             'timestamp': user_message.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
         },
         'bot_message': {
-            'id': bot_message.id, # type: ignore
+            'id': bot_message.id,  # type: ignore
             'text': bot_message.text,
             'timestamp': bot_message.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
         },
