@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mensagem de boas-vindas ao carregar
   const welcomeMessage = `
-  🎮 FALA, FURIOSO! 🐍  
+  🎮 FALA, FURIOSO! 🐺  
   Eu sou o bot oficial da FURIA, pronto pra te deixar por dentro de tudo!  
   Quer saber quando é o próximo jogo, estatísticas dos players, ou só trocar uma ideia sobre o time mais brabo do cenário?  
   Manda ver no chat e #DIADEFURIA começa agora!
