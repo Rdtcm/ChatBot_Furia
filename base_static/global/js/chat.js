@@ -121,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const welcomeMessage = `
   🎮 FALA, FURIOSO! 🐺  
   Eu sou o bot oficial da FURIA, pronto pra te deixar por dentro de tudo!  
-  Quer saber quando é o próximo jogo, estatísticas dos players, ou só trocar uma ideia sobre o time mais brabo do cenário?  
+  Quer saber qual é o elencoda furia ou os torneios que a furia esta competindo,
+  ou só trocar uma ideia sobre o time mais brabo do cenário?  
   Manda ver no chat e #DIADEFURIA começa agora!
 
   🔥 VAMOS PRA CIMA! 🔥
