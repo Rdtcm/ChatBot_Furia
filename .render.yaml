@@ -2,11 +2,11 @@ services:
   - type: web
     name: furia-chat
     env: python
-    buildCommand: >
-      pip install -r requirements.txt
-      && python manage.py migrate --no-input
-      && python manage.py collectstatic --no-input
-    startCommand: "gunicorn project.wsgi"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --no-input"
+    # ATENÇÃO: adicionamos o migrate aqui
+    startCommand: >
+      bash -lc "python manage.py migrate --no-input &&
+                gunicorn project.wsgi"
     envVars:
       - key: DJANGO_SECRET_KEY
         sync: false
@@ -17,6 +17,7 @@ services:
         name: static
         path: /static
         dir: staticfiles
+
 
 
 
