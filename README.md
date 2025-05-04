@@ -63,8 +63,7 @@ Crie um arquivo `.env` com suas chaves da PandaScore e OpenRouter:
 PANDASCORE_TOKEN=seu_token_aqui
 OPENROUTER_API_KEY=sua_api_key_aqui
 ```
-
-> ⚠️ **Observação**: é necessário gerar suas próprias API keys diretamente nos sites da [PandaScore](https://pandascore.co) e [OpenRouter](https://openrouter.ai/) e criar o arquivo `.env` no diretório raiz para que tudo funcione corretamente.
+---
 
 4. Execute o servidor:
 
@@ -80,9 +79,17 @@ http://127.0.0.1:8000/chat/
 
 ---
 
-## 🧠 Considerações Finais
+## ⚠️ Nota sobre os Dados de Torneios
 
-Este projeto entrega uma experiência prática e interativa voltada para a comunidade de fãs da FURIA, combinando dados ao vivo com inteligência artificial. Com comandos úteis e um assistente conversacional, o fã pode se sentir mais próximo do time.
+Os torneios listados no comando `/torneios` foram obtidos via API da **PandaScore**, utilizando o **ID oficial da FURIA** como filtro. No entanto, essa API retorna todas as ligas e qualificatórias **associadas à equipe**, mesmo que **a FURIA não tenha participado efetivamente em 2025**.
+
+Por limitação de tempo e acesso aos endpoints mais específicos, **não foi possível filtrar apenas os torneios com participação confirmada**. A solução ideal seria utilizar os endpoints de partidas, agrupando os torneios apenas a partir de confrontos reais — estrutura essa que já está prevista e pode ser aplicada facilmente no futuro.
+
+Esse ponto foi documentado para manter total transparência.
+
+## 🧠 Considerações
+
+Este chatbot é uma iniciativa voltada à comunidade de fãs da FURIA, oferecendo uma experiência interativa, informativa e inteligente. O projeto se mantém modular, com potencial para novos comandos, integração de histórico de partidas e muito mais.
 
 ---
 
