@@ -93,7 +93,7 @@ def limpar_resposta(resposta: str) -> str:
     return resposta
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # Teste com histórico vazio
-    resposta = enviar_para_openrouter("Olá bot!", [])
-    print(resposta)
+    # resposta = enviar_para_openrouter("Olá bot!", [])
+    # print(resposta)

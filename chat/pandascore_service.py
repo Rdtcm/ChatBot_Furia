@@ -55,6 +55,7 @@ def buscar_elenco_furia() -> list:
 
 def buscar_torneios_furia() -> list:
     url = f'https://api.pandascore.co/teams/{ID_TIME_FURIA}/leagues'
+    
     headers = {
         'Authorization': f'Bearer {PANDASCORE_API_KEY}'
     }

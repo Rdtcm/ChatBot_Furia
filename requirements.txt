@@ -4,13 +4,16 @@ asgiref==3.8.1
 certifi==2025.4.26
 charset-normalizer==3.4.1
 distro==1.9.0
+dj-database-url==2.3.0
 Django==5.2
+gunicorn==23.0.0
 h11==0.16.0
 httpcore==1.0.9
 httpx==0.28.1
 idna==3.10
 jiter==0.9.0
 openai==1.76.0
+packaging==25.0
 pydantic==2.11.3
 pydantic_core==2.33.1
 python-dotenv==1.1.0
