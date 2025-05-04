@@ -1,0 +1,85 @@
+/* Estilos gerais para o body */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+body {
+    font-family: sans-serif; /* Uma fonte padrão */
+    margin: 0; /* Remover margens padrão do body */
+    padding: 0; /* Remover paddings padrão do body */
+    box-sizing: border-box; /* Melhor modelo de caixa para lidar com padding e border */
+}
+
+/* Estilos para o header */
+header {
+    background-color: #f8f8f8; /* Um fundo cinza claro para o header */
+    color: #333; /* Cor do texto padrão no header */
+    padding: 15px 20px; /* Espaçamento interno superior/inferior e esquerda/direita */
+    display: flex; /* Usar flexbox para alinhar logo e botões */
+    justify-content: space-between; /* Espaçar a logo e a navegação o máximo possível */
+    align-items: center; /* Alinhar verticalmente a logo e os botões */
+    border-bottom: 1px solid #eee; /* Uma linha sutil na parte inferior do header */
+    position: relative;
+}
+
+/* Estilos para a logo */
+.logo {
+    display: flex; /* Alinhar a imagem e o link (que contém o texto) */
+    align-items: center; /* Alinhar verticalmente a imagem e o link */
+}
+
+.logo img {
+    max-height: 60px; /* Altura máxima da logo */
+    margin-right: 30px; /* Espaço entre a logo e o link */
+}
+
+.logo .logo-link {
+    text-decoration: none; /* Remove o sublinhado padrão de links */
+    color: inherit; /* Herda a cor do texto do elemento pai (header) */
+    display: flex; /* Garante que o texto dentro do link não se comporte como bloco */
+    align-items: center; /* Alinha verticalmente o texto dentro do link (embora não seja estritamente necessário aqui, mantém a consistência) */
+}
+
+.logo .logo-link span {
+    font-size: 1.5em; /* Tamanho da fonte do nome FURIA */
+    font-weight: bold; /* Deixar o nome em negrito */
+}
+
+.top-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+a.btn-top {
+    background-color: #000000;
+    color: white;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-top:hover {
+    background-color: #e65c00;
+}
+
+
+/* Estilos para a área de conteúdo (onde as páginas filhas serão inseridas) */
+.content {
+    padding: 20px; /* Espaçamento interno padrão para o conteúdo */
+}
+
+/* Estilos para o rodapé (opcional) */
+footer {
+    text-align: center; /* Centralizar o texto do rodapé */
+    padding: 10px; /* Espaçamento interno do rodapé */
+    background-color: #333; /* Fundo escuro para o rodapé */
+    color: white; /* Texto branco no rodapé */
+    position: fixed; /* Fixar o rodapé na parte inferior */
+    bottom: 0;
+    width: 100%;
+}
