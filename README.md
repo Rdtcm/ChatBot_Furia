@@ -36,6 +36,27 @@ Este projeto foi desenvolvido como parte do desafio técnico para a FURIA, com o
 
 ---
 
+## ☁️ Deploy em Produção (Render)
+
+O projeto está hospedado na plataforma **Render**, garantindo alta disponibilidade e deploy automático a cada commit no repositório.
+
+- **URL pública**: [https://chatbot-furia-grtu.onrender.com](https://chatbot-furia-grtu.onrender.com)
+
+### Ajustes e desafios no Deploy
+
+1. **Provisionamento do PostgreSQL**
+   - Banco PostgreSQL criado no Render e variável `DATABASE_URL` configurada corretamente.
+   - Inicialmente usava um placeholder (`host:port`) e gerava erro de host desconhecido até apontar para a URL real.
+
+2. **Migrações automatizadas**
+   - Adição de `python manage.py migrate --no-input` no comando de start para criar as tabelas antes de iniciar o servidor.
+
+3. **Serviço de arquivos estáticos**
+   - Implementação de WhiteNoise para servir CSS, JS e imagens em produção.
+   - `STATICFILES_DIRS` aponta para `base_static/` e `STATIC_ROOT` para `staticfiles/`, coletados via `collectstatic`.
+
+---
+
 ## 📂 Como Rodar Localmente
 
 # Obs: 
@@ -79,14 +100,16 @@ http://127.0.0.1:8000/chat/
 
 ---
 
-## ⚠️ Nota sobre os Dados de Torneios
+## ⚠️ Nota sobre os Dados de Torneios e Respostas do Bot
 
 Os torneios listados no comando `/torneios` foram obtidos via API da **PandaScore**, utilizando o **ID oficial da FURIA** como filtro. No entanto, essa API retorna todas as ligas e qualificatórias **associadas à equipe**, mesmo que **a FURIA não tenha participado efetivamente em 2025**.
 
 Por limitação de tempo e acesso aos endpoints mais específicos, **não foi possível filtrar apenas os torneios com participação confirmada**. A solução ideal seria utilizar os endpoints de partidas, agrupando os torneios apenas a partir de confrontos reais — estrutura essa que já está prevista e pode ser aplicada facilmente no futuro.
 
-Esse ponto foi documentado para manter total transparência.
+Alem disso, as respostas oferecidas, em alguns momentos nao sao tao satisfatorias, isso devido ao que a api da OpenRouter me retorna no back-end, as resposts variam conforme o modelo e o custo.
 
+Esses pontos foram documentados para manter total transparência.
+---
 ## 🧠 Considerações
 
 Este chatbot é uma iniciativa voltada à comunidade de fãs da FURIA, oferecendo uma experiência interativa, informativa e inteligente. O projeto se mantém modular, com potencial para novos comandos, integração de histórico de partidas e muito mais.
