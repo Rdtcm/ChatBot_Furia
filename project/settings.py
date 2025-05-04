@@ -55,7 +55,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL', 'postgresql://chatbot_db_65or_user:bQp59TfbW7B5TadZD9Q18bnrToi5ea2d@dpg-d0bepdpr0fns73dd1lk0-a.oregon-postgres.render.com/chatbot_db_65or'))
+    'default': dj_database_url.config()
 }
 
 AUTH_PASSWORD_VALIDATORS = [
