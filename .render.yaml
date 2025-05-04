@@ -9,3 +9,10 @@ services:
         sync: false
       - key: DATABASE_URL
         sync: false
+    static:
+      - type: static
+        name: static
+        path: /static
+        dir: staticfiles
+
+
