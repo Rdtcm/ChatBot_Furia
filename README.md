@@ -36,12 +36,6 @@ Este projeto foi desenvolvido como parte do desafio técnico para a FURIA, com o
 
 ---
 
-## ☁️ Deploy em Produção (Render)
-
-O projeto está hospedado na plataforma **Render**, garantindo alta disponibilidade e deploy automático a cada commit no repositório.
-
-- **URL pública**: [https://chatbot-furia-grtu.onrender.com](https://chatbot-furia-grtu.onrender.com)
-
 ### Ajustes e desafios no Deploy
 
 1. **Provisionamento do PostgreSQL**
